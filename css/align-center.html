@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>align-center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            border: 1px solid black;
+            height: 100%;
+            width: 100%;
+            background-color: rosybrown;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body {
+            border: 1px solid red;
+            width: 50vw;
+            height: 50vh;
+            background-color: royalblue;
+            text-align: center;
+        }
+
+        /* 行内元素居中*/
+        /* 父元素设置text-align:center 子元素 display:inline/inline-block */
+        .inline-block {
+            display: inline-block;
+            background-color: saddlebrown;
+        }
+
+        /* 块级元素内容水平居中 */
+        /*  */
+        .margin-0-auto {
+            display: block;
+            margin: 0 auto;
+            background-color: saddlebrown;
+        }
+
+        
+
+    </style>
+</head>
+
+<body>
+    <div class="inline-block">
+        inline-block
+    </div>
+    <div class="margin-0-auto">
+        margin-0-auto
+    </div>
+</body>
+
+</html>

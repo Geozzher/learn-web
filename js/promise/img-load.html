@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>img-load</title>
+</head>
+
+<body>
+    <script>
+        // Image(width,height)会创建一个新的HTMLImageElement实例 <==> document.createElement('img')
+        let url = `https://www.baidu.com/img/flexible/logo/pc/result@2.png`
+        let urlError = `https://www.baidu.com/img/flexible/logo/pc/result@21.png`
+
+        function imgLoad(url) {
+            return new Promise((resolve, reject) => {
+                let img = new Image()
+                img.src = url
+                img.onload = () => {
+                    resolve(img)
+                }
+                img.onerror = () => {
+                    reject(new Error(`图片加载失败`))
+                }
+            })
+        }
+
+        imgLoad(url).then(img => {
+            document.body.appendChild(img)
+        }).catch(err => {
+            document.body.innerHTML = err
+        })
+
+    </script>
+</body>
+
+</html>

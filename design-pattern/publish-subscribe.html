@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>publish-subscribe</title>
+</head>
+
+<body>
+    <!-- 发布订阅模式，也称为观察者模式，被观察对象维护一组观察者，当被观察的对象状态发生改变时，调用被观察者的某个方法通过所有的观察者 -->
+    <!-- 实现 -->
+    <script>
+        // 应用场景
+        // vue的响应式原理  数据劫持+观察者模式
+        // DOM事件监听
+        // 定义被观察对象
+        // 优点
+        // 支持简单的广播通信，自动通知所有已经订阅过的对象
+        // 目标对象与观察者之间的抽象耦合关系能单独扩展以及重用
+        // 增加了灵活性
+        // 观察者模式所做的工作就是在解耦，让耦合的双方都依赖于抽象，而不是依赖于具体。从而使得各自的变化都不会影响到另一边的变化。
+        // 缺点
+        // 过度使用会导致对象与对象之间的联系弱化，会导致程序难以跟踪维护和理解
+
+        function Subject() {
+            this.observers = []
+        }
+
+        Subject.prototype = {
+            // 订阅 addObserver
+            subscribe: function (observer) {
+                this.observers.push(observer)
+            },
+
+            // 取消订阅  unsubscribe
+            unsubscribe: function (observerToRemove) {
+                this.observers = this.observers.filter(observer => observer !== observerToRemove)
+            },
+
+            // 触发事件  fire 通知所有的订阅者
+            fire: function () {
+                this.observers.forEach(observer => {
+                    observer.call()
+                })
+            }
+        }
+
+        // 使用 
+        const subject = new Subject()
+
+        function observer1() {
+            // 这样写虽然没有报错，但是其是挂载到调用者对象上的observer上并无ss属性
+            // this.ss = 'observer1sss'
+            console.log(`observer1`);
+        }
+
+        function observer2() {
+            console.log(`observer2`);
+        }
+
+        // 订阅事件
+        subject.subscribe(observer1)
+        subject.subscribe(observer2)
+
+        // 触发事件
+        subject.fire()
+
+        // 取消订阅
+        subject.unsubscribe(observer1)
+        subject.fire()
+    </script>
+</body>
+
+</html>

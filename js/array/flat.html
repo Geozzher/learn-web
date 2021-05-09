@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flat</title>
+</head>
+
+<body>
+    <script>
+        // list 是一个深度为4的数组
+        let list = [0, 1, 2, 3, 4, [1, 2, 3, 4, [2, 3, 4, [3, 4, [4]]]]]
+
+        // 方法1 使用[].concat(...list)
+        // 局限  只能展开深度为1的数组
+        let flat1 = [].concat(...list)
+        console.log(flat1);
+
+        // 方法2 使用array原型提供的flat函数
+        // Array.prototype.flat([deep]) deep为展开数组的深度，当deep缺省时，默认情况下只能展开深度为1的数组 
+        // 完全展开方法  将deep参数设置为 Infinity
+        let flat2 = list.flat(Infinity)
+        console.log(flat2);
+
+        // 方法3 使用reduce + concat
+        // 实现深度扁平化，deep参数需要设置为Infinity
+        function flatten1(arr, deep = 1) {
+            return deep > 0 ? arr.reduce((acc, cur) => acc.concat(Array.isArray(cur) ? flatten1(cur, deep - 1) : cur), []) : arr.slice()
+        }
+        let flat3 = flatten1(list, Infinity)
+        console.log(flat3);
+
+        // 方法4 使用stack
+        function flatten2(arr) {
+            let stack = [...arr]
+            let res = []
+            while (stack.length) {
+                let itm = stack.shift()
+                if (Array.isArray(itm)) {
+                    stack.push(...itm)
+                } else {
+                    res.push(itm)
+                }
+            }
+            return res
+        }
+        let flat4 = flatten2(list)
+        console.log(flat4);
+
+    </script>
+</body>
+
+</html>
