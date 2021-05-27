@@ -13,7 +13,7 @@
             box-sizing: border-box;
         }
 
-        .aside {
+        .left {
             border: 1px solid black;
             width: 100%;
             float: left;
@@ -21,19 +21,26 @@
             background: lightblue;
         }
 
-        .main {
+        .right {
             float: left;
             width: 200px;
             background: blue;
+        }
+
+        p {
+            margin-right: 200px;
+            overflow: hidden;
         }
     </style>
 </head>
 
 <body>
-    <div class="aside">
-        left;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;hgyugyyyyyyyyyyyllllllllllllllllllllllllhhhhhhhhhhhhhhhhssssssss
+    <!-- 内容会被压盖，里侧要继续设置margin -->
+    <div class="left">
+        <p>left;;;;;;dddddddd;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;hgyugyyyyyyyyyyyllllllllllllllllllllllllhhhhhhhhhhhhhhhhssssssss
+        </p>
     </div>
-    <div class="main">right</div>
+    <div class="right">right</div>
 </body>
 
 </html>
