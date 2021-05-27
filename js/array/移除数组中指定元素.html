@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移除数组中指定元素.html</title>
+</head>
+
+<body>
+    <script>
+        // 返回一个新数组
+        function removeFilter(arr, item) {
+            return arr.filter((itm, idx) => {
+                return itm !== item
+            })
+        }
+
+        // 返回一个新数组
+        function removeReduce(arr, item) {
+            return arr.reduce((acc, cur, idx) => {
+                cur !== item && acc.push(cur)
+                return acc
+            }, [])
+        }
+
+        // 直接在原数组上修改
+        function removeWithCopy(arr, item) {
+            while (arr.indexOf(item) !== -1) {
+                arr.splice(arr.indexOf(item), 1)
+            }
+            return arr
+        }
+        document.write(removeFilter([1, 2, 3, 4], 4))
+        document.write(removeReduce([1, 2, 3, 4], 4))
+        document.write(removeWithCopy([1, 2, 3, 4], 4))
+    </script>
+</body>
+
+</html>

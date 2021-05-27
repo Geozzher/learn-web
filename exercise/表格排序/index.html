@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格排序</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>price</th>
+                <th>sales</th>
+            </tr>
+        </thead>
+        <tbody id="jsList">
+            <tr>
+                <td>1</td>
+                <td>10.0</td>
+                <td>800</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>30.0</td>
+                <td>600</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>20.5</td>
+                <td>700</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>40.5</td>
+                <td>500</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>60.5</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>50.0</td>
+                <td>400</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>70.0</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>80.5</td>
+                <td>100</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        function sort(type, order) {
+            let map = ['id', 'price', 'sales'];
+            let parent = document.getElementById('jsList');
+            let trs = parent.children;
+            let col = map.indexOf(type);
+            console.log(map, parent, trs, col);
+
+            let sortTrs = [].slice.call(trs).sort(function (a, b) {
+                let aT = Number(a.children[col].innerHTML)
+                let bT = Number(b.children[col].innerHTML)
+                return order === 'desc' ? aT < bT : aT > bT
+            })
+
+            console.log(sortTrs);
+            sortTrs.map(function (el) {
+                parent.appendChild(el)
+            })
+
+            console.log(parent);
+        }
+
+        sort('price', 'desc')
+
+    </script>
+</body>
+
+</html>

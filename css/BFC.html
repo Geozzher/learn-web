@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            overflow: hidden;
+        }
+
+        .father {
+            background: yellow;
+            width: 200px;
+        }
+
+        .son {
+            background: red;
+            width: 100px;
+            height: 100px;
+            float: left;
+            /* margin-top: 10px; */
+        }
+
+        p {
+            margin: 20px 20px;
+            height: 100px;
+            width: 100px;
+            background: lightblue;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            background: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 什么是BFC  独立渲染区域 -->
+    <!-- 创建BFC的方式 -->
+    <!-- 1 float 属性不为 none -->
+    <!-- 2 position为absolute/fixed -->
+    <!-- 3 display为 inline-block table-cell flex -->
+    <!-- 4 overflow为hidden auto scoll -->
+
+    <!-- BFC解决的问题 -->
+    <!--1 边距重叠问题 --> 给元素设置BFC
+    <!--2 盒子塌陷问题 --> 父子元素中，子元素设置margin-top会导致父元素高度塌陷
+    <!--3 清除浮动  --> 元素浮动时，下边再接盒子的话会遮挡盒子的内容，给浮动元素的父级元素设置BFC
+    <!--4 浮动时文字环绕问题 --> 给文字容器设置BFC
+
+    <!-- <div class="container">
+        <p></p>
+    </div>
+    <div class="container">
+        <p></p>
+    </div>
+    <p></p> -->
+
+    <!-- <div class="father">
+        <div class="son"></div>
+    </div> -->
+
+    <!-- 浮动时父元素不设置高度，高度为0,下面再接box时，浮动元素会遮挡box的内容 -->
+    <div class="father" style="overflow: hidden;">
+        <div class="son"></div>
+        <div class="son"></div>
+    </div>
+    <div class="box">
+
+    </div>
+
+    <div class="father">
+        <div style="width:100px;height: 100px;background: red;float: left;">
+
+        </div>
+        <div style="overflow:hidden;">
+            这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字这是文字 2222222222 22
+        </div>
+    </div>
+
+</body>
+
+</html>

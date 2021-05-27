@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>float</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .bfc {
+            overflow: hidden;
+        }
+
+        .box1 {
+            width: 100px;
+            height: 100px;
+            float: left;
+            background: yellow;
+        }
+
+        .box2 {
+            width: 200px;
+            height: 100px;
+            float: left;
+            background: yellowgreen;
+        }
+
+        .box3 {
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 什么是浮动，浮动元素脱离文档流，不占据空间。浮动元素碰到包含它的边框或者浮动元素的边框停留 -->
+    <!-- 清除浮动 -->
+    <!-- 1 空标签清除浮动 -->
+    <!-- 2 使用overflow -->
+    <!-- 3 使用after伪对象清除浮动 -->
+    <div class="bfc">
+        <div class="box1"></div>
+        <span class="box2"></span>
+    </div>
+
+    <div class="box3"></div>
+
+</body>
+
+</html>
