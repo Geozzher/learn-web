@@ -1,0 +1,35 @@
+.container {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+
+.container .msg-title {
+    background-color: #111;
+    color: #fff;
+    padding-left: 16px;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.container .msg-box {
+    min-height: 300px;
+    padding-left: 10px;
+}
+
+form {
+    padding: 0 0 10px 10px;
+}
+
+input {
+    padding: 4px 10px;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 4px 10px;
+    height: 30px;
+    box-sizing: border-box;
+}
