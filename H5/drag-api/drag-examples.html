@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drag-examples</title>
+    <style>
+        .drop {
+            border: 1px blueviolet solid;
+            height: 300px;
+            background: cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <img id="one" draggable="true" src="./img/p3.png" alt="">
+        <div class="drop"></div>
+    </div>
+    <script>
+        var box = document.getElementsByClassName('box')[0];
+        var drop = document.getElementsByClassName('drop')[0];
+        box.ondragstart = function (e) {
+            console.log('drag-start');
+            e.dataTransfer.setData('id', e.target.id);
+        }
+        box.ondrag = function (e) {
+            console.log('drag', e.target.id);
+        }
+        box.ondragend = function (e) {
+            console.log('drag-end')
+        }
+        drop.ondragenter = function (e) {
+            console.log('drag-enter');
+            e.preventDefault();
+        }
+        drop.ondragover = function (e) {
+            console.log('drag-over');
+            e.preventDefault();
+            drop.innerHTML = '';
+        }
+        drop.ondragleave = function (e) {
+            console.log('drag-leave');
+            e.preventDefault();
+        }
+        drop.ondrop = function (e) {
+            console.log('drop');
+            var imgId = e.dataTransfer.getData('id');
+            var img = document.getElementById(imgId).cloneNode(true);
+            drop.appendChild(img);
+        }
+    </script>
+</body>
+
+</html>
