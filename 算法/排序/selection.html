@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bubble</title>
+</head>
+
+<body>
+    <script>
+        // 找出从n到最后一个元素中最小的元素
+        function findMin(arr, n) {
+            let minIndex = n
+            for (let i = n; i < arr.length; i++) {
+                if (arr[i] < arr[minIndex]) {
+                    minIndex = i
+                }
+            }
+            return minIndex
+        }
+
+        function select_sort(arr) {
+            const len = arr.length
+            let minIndex, temp
+
+            for (let i = 0; i < len; i++) {
+                minIndex = findMin(arr, i)
+                temp = arr[i]
+                arr[i] = arr[minIndex]
+                arr[minIndex] = temp
+            }
+            return arr
+        }
+
+        // 直接写
+        function selection_sort_direct(arr) {
+            const len = arr.length
+            let minIndex, temp
+            for (let i = 0; i < len; i++) {
+                minIndex = i
+                for (let j = i + 1; j < len; j++) {
+                    if (arr[j] < arr[minIndex]) {
+                        minIndex = j
+                    }
+                }
+
+                temp = arr[i]
+                arr[i] = arr[minIndex]
+                arr[minIndex] = temp
+            }
+            return arr
+        }
+
+        const arr = [2, 3, 5, 1, 9, 6, 4, 2]
+        alert(select_sort(arr))
+    </script>
+</body>
+
+</html>

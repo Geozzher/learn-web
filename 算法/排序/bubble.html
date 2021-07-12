@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bubble</title>
+</head>
+
+<body>
+    <script>
+        // 第一轮，相邻两个比较，大的交换到后边，第一轮后，最大的元素将被排到最后
+        // 第二轮，同样是从第一个元素开始。次大的拍到第二个
+        function bubble(arr, n) {
+            for (let i = 0; i < n - 1; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    let temp = arr[i]
+                    arr[i] = arr[i + 1]
+                    arr[i + 1] = temp
+                }
+            }
+        }
+
+        function bubble_sort(arr) {
+            const len = arr.length
+            for (let i = len; i >= 1; i--) {
+                bubble(arr, i)
+            }
+            return arr
+        }
+
+        // 直接写
+        function bubble_sort_direct(arr) {
+            const len = arr.length
+            for (let i = len; i >= 1; i--) {
+                for (let j = 0; j < i; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        let temp = arr[j]
+                        arr[j] = arr[j + 1]
+                        arr[j + 1] = temp
+                    }
+                }
+            }
+            return arr
+        }
+
+        const arr = [2, 3, 5, 1, 9, 6, 4, 2]
+        alert(bubble_sort_direct(arr))
+    </script>
+</body>
+
+</html>
