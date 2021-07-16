@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>proxy</title>
+</head>
+
+<body>
+    <script>
+        let handler = {
+            get: function (target, name) {
+                if (target.hasOwnProperty(name)) {
+                    return target[name]
+                } else {
+                    console.log('没有找到你要的属性')
+                }
+            },
+            set: function (target, name, value) {
+                target[name] = "#" + value
+            },
+            deleteProperty: function (target, name) {
+                console.log(target, '删除了属性', name)
+                delete target[name]
+            }
+
+        }
+
+        arr = ['22']
+        const p = new Proxy(arr, handler)
+
+        p.a = 1
+        p.abc = 'abc'
+        // p.push['22']
+
+        delete p.a
+        console.log('p.a', p.a);
+        console.log('p.abc', p.abc);
+        console.log('p', p);
+        console.log('arr', arr);
+
+    </script>
+</body>
+
+</html>

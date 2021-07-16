@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deep-clone</title>
+</head>
+
+<body>
+    <script>
+        // 乞丐版，遇到其他引用类型，函数，循环引用则不支持
+        function deepClone1(data) {
+            return JSON.parse(JSON.stringify(data))
+        }
+
+        // 基础版本，不考虑数组
+        function deepClone2(data) {
+            if (typeof data === 'object') {
+                const copy = {}
+
+                for (const key in data) {
+                    copy[key] = deepClone2(data[key])
+                }
+                return copy
+            } else {
+                return data
+            }
+        }
+
+        // 兼容数组的，但是循环引用会导致占内存溢出
+        function deepClone3(data) {
+            if (typeof data === 'object') {
+                const copy = Array.isArray(data) ? [] : {}
+                for (const key in data) {
+                    copy[key] = deepClone3(data[key])
+                }
+                return copy
+            } else {
+                return data
+            }
+        }
+
+        function deepClone4(data, map = new Map()) {
+            if (typeof data === 'object') {
+                const copy = Array.isArray(data) ? [] : {}
+                if (map.get(data)) {
+                    return map.get(data)
+                }
+
+                for (const key in data) {
+                    copy[key] = deepClone4(data[key], map)
+                }
+                return copy
+            } else {
+                return data
+            }
+        }
+
+
+
+        const target = {
+            field1: 1,
+            field2: undefined,
+            field3: 'ConardLi',
+            field4: {
+                child: 'child',
+                child2: {
+                    child2: 'child2'
+                }
+            }
+        }
+
+        document.write(JSON.stringify(deepClone2(target)))
+
+    </script>
+</body>
+
+</html>

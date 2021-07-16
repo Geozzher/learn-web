@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>generator</title>
+</head>
+
+<body>
+    <script>
+        // 关联请求获取数据的时候可以
+        function getUser() {
+            setTimeout(() => {
+                let data = '用户数据'
+                iterator.next(data)
+            }, 1000)
+        }
+
+        function getOrders() {
+            setTimeout(() => {
+                let data = '订单数据'
+                iterator.next(data)
+            }, 1000)
+        }
+
+        function getGoods() {
+            setTimeout(() => {
+                let data = '商品信息'
+                iterator.next(data)
+            }, 1000)
+        }
+
+        function* gen() {
+            let users = yield getUser()
+            console.log(users)
+            let orders = yield getOrders()
+            console.log(orders)
+            let goods = yield getGoods()
+            console.log(goods)
+        }
+
+        let iterator = gen()
+        iterator.next()
+    </script>
+</body>
+
+</html>
