@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-width: 400px;
+        }
+
+        .box {
+            padding: 0 100px;
+            background: pink;
+        }
+
+        .left {
+            width: 100px;
+            height: 100px;
+            background: lightblue;
+            float: left;
+            /*在box的盒子里，往左移动了content的宽度*/
+            margin-left: -100%;
+            /* 在自己原有位置上平移 */
+            position: relative;
+            left: -100px;
+
+        }
+
+        .right {
+            width: 100px;
+            height: 100px;
+            float: left;
+            background: lightblue;
+            /* 在box的盒子里，往左移动了本身的位置 */
+            margin-left: -100px;
+            /* 在自己原有位置上平移 */
+            position: relative;
+            right: -100px;
+        }
+
+        .content {
+            width: 100%;
+            height: 100px;
+            float: left;
+            background: blue;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="content">
+            <div class="innercontent">
+                <p>我是中间主题内容部分</p>
+                <p>我是中间主题内容部分</p>
+                <p>我是中间主题内容部分</p>
+            </div>
+        </div>
+        <div class="left">
+            <p>
+                我是左侧导航栏我是左侧导航栏我是左侧导航栏
+            </p>
+        </div>
+        <div class="right">
+            <p>
+                我是右侧导航栏我是右侧导航栏我是右侧导航栏
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

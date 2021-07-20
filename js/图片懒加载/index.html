@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>imgLazyLoad</title>
+</head>
+
+<body>
+    <h2>1我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字是文字</h2>
+    <h2>2我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字是文字</h2>
+    <h2>2我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字是文字</h2>
+    <h2>2我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字是文字</h2>
+    <h2>2我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字是文字</h2>
+    <h2>2我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字是文字</h2>
+    <h2>2我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字是文字</h2>
+    <h2>2我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字我是文字是文字</h2>
+    <img src="" alt="图片1-loading...." data-src="./imgs/1.jpg">
+    <img src="" alt="图片2-loading...." data-src="./imgs/2.jpg">
+    <img src="" alt="图片3-loading...." data-src="./imgs/3.jpg">
+
+    <script>
+        // 使用offsettop，距离其父参照物顶部内容的高度
+        let imgs = document.querySelectorAll('img')
+        let n = 0
+
+        const imgLazyLoad = () => {
+            let seeHight = document.documentElement.clientHeight
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            for (let i = n; i < imgs.length; i++) {
+                if (imgs[i].offsetTop < seeHight + scrollTop) {
+                    imgs[i].src = imgs[i].dataset['src']
+                    console.log(i)
+                    n = i + 1
+                }
+            }
+        }
+        imgLazyLoad()
+        window.onscroll = imgLazyLoad
+
+
+        // 使用getBoundingRect().top等属性
+
+    </script>
+
+</body>
+
+</html>
