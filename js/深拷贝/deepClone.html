@@ -50,6 +50,7 @@
                 }
 
                 for (const key in data) {
+                    map.set(data,data)
                     copy[key] = deepClone4(data[key], map)
                 }
                 return copy
@@ -65,14 +66,21 @@
             field2: undefined,
             field3: 'ConardLi',
             field4: {
-                child: 'child',
+                child: 'field4',
                 child2: {
                     child2: 'child2'
-                }
+                },
+               
             }
         }
-
-        document.write(JSON.stringify(deepClone2(target)))
+        let obj1 = {
+        };
+        let obj2 = {
+            b: obj1
+        };
+        obj1.a = obj2;
+        console.log(deepClone4(obj1));
+        // document.write(JSON.stringify(deepClone2(target)))
 
     </script>
 </body>
