@@ -10,6 +10,11 @@
     <script>
         // 相较于数组而言，第i个位置的左孩子的下标 2i+1,右孩子2i+2
         // 第i个节点的父节点的下标是 Math.floor((i-1)/2)
+
+        // 堆排特性
+        // 创建初始堆  O(n)
+        // 交换重建堆的过程  从log2(n-1) 到  1
+        // 所以堆排的复杂度一般就认为是O(nlogn)级
         function swap(arr, i, j) {
             let temp = arr[i]
             arr[i] = arr[j]
