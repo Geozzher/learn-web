@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>heap-sort</title>
+</head>
+<body>
+    <script>
+        // 相较于数组而言，第i个位置的左孩子的下标 2i+1,右孩子2i+2
+        // 第i个节点的父节点的下标是 Math.floor((i-1)/2)
+        function swap(arr, i, j) {
+            let temp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = temp
+        }
+
+        function buildHeap(arr, len) {
+            for(let i = Math.floor(len / 2); i >= 0; i--) {   
+                maxHeap(arr, i, len)
+            }
+        }
+
+        function maxHeap(arr, i, len) {
+            let maxNode
+            let left = 2 * i + 1
+            let right = 2 * i + 2
+
+            if(left <= len && arr[left] > arr[i]) {
+                maxNode = left
+            } else {
+                maxNode = i
+            }
+
+            if(right <= len && arr[right] > arr[maxNode]) {
+                maxNode = right
+            }
+
+            if(maxNode !== i) {
+                swap(arr, maxNode, i)
+                maxHeap(arr, maxNode, len)
+            }
+        }
+
+
+        function sort(arr) {
+            
+            let len = arr.length - 1
+            buildHeap(arr, len)
+            for(let i = len; i > 0;) {
+                swap(arr, 0, i)
+                // 调整堆的过程,长度在变化
+                maxHeap(arr, 0, --i)
+            }
+            return arr
+        }
+
+
+        const arr = [1, 4, 3, 5, 6, 4, 7, 11, 9]
+        alert(sort(arr))
+    </script>
+    
+</body>
+</html>
