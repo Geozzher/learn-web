@@ -10,22 +10,22 @@
 
 <body>
     <script>
-        // function cssStyle2DomStyle(s) {
-        //     // 处理特殊情况 eg -www
-        //     if (s && s[0] === '-') s = s.substring(1);
-        //     return s.replace(/-(\w)/g, function (_, c) {
-        //         console.log(_);
-        //         console.log(c);
-        //         return c ? c.toUpperCase() : ''
-        //     })
-        // }
-
-        function cssStyle2DomStyle(sName) {
-            if (sName && sName[0] === '-') sName = sName.substring(1)
-            return sName.replace(/-(\w)/g, function (_, c) {
-                return c && c.toUpperCase()
+        function cssStyle2DomStyle(s) {
+            // 处理特殊情况 eg -www
+            if (s && s[0] === '-') s = s.substring(1);
+            return s.replace(/-(\w)/g, function (_, c) {
+                console.log(_);
+                console.log(c);
+                return c ? c.toUpperCase() : ''
             })
         }
+
+        // function cssStyle2DomStyle(sName) {
+        //     if (sName && sName[0] === '-') sName = sName.substring(1)
+        //     return sName.replace(/-(\w)/g, function (_, c) {
+        //         return c && c.toUpperCase()
+        //     })
+        // }
 
         function captureThreeNumbers(str) {
             const arr = str.match(/\d{3}/)
