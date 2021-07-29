@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>thrrotle-debunce</title>
+
+    <style>
+        body {
+            height: 2000px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" name="input" id="txt">
+
+    <script>
+        const input = document.querySelector('#txt')
+
+        function listenInput() {
+            console.log(this.value)
+        }
+
+        // input.addEventListener('input', listenInput)
+
+        // 每次调用debunce时,清除前面的fn调用
+        function debunce(fn, timer) {
+            let t = null
+            return function () {
+                if (t) clearTimeout(t)
+                t = setTimeout(() => {
+                    fn.apply(this, arguments)
+                    t = null
+                }, timer)
+            }
+        }
+
+        input.addEventListener('input', debunce(listenInput, 1000))
+
+        // 稀释执行次数,滚动事件,
+        // 没有用到setTimeout()
+        function throttle(fn, delay) {
+            let begin = 0
+
+            return function () {
+                let cur = new Date().getTime()
+                if (cur - begin > delay) {
+                    fn.apply(this, arguments)
+                    begin = cur
+                }
+            }
+        }
+
+        function listenScroll() {
+            console.log('1111')
+        }
+
+        window.addEventListener('scroll', throttle(listenScroll, 1000))
+
+
+
+    </script>
+</body>
+
+</html>
