@@ -72,8 +72,11 @@
                 }
             }
 
+            // 所有的promise执行成功触发成功的回调
+            // 成功的promise的参数是所有成功的promise的value的数组
+            // 失败就返回第一个失败的promise的reason
             static all(promises) {
-                if(!Array.isArray(promises)){
+                if (!Array.isArray(promises)) {
                     throw new Error('need a array')
                 }
                 return new Promise((resolve, reject) => {
@@ -83,7 +86,7 @@
                         promise.then(value => {
                             res.push(value)
                             num++
-                            if(num === promises.length) {
+                            if (num === promises.length) {
                                 resolve(res)
                             }
                         }, reason => {
@@ -95,14 +98,58 @@
                 })
             }
 
+
+
+            // 所有传入的promise都完成之后成功
+            // 适用于彼此不依赖的异步任务完成，得到每一个promise的结果
+            static allSettled(iterable) {
+                return new Promise((resolve, reject) => {
+                    const res = []
+                    let count = iterable.length
+                    iterable.forEach((p => {
+                        p.then((value) => {
+                            res.push(value)
+                        }, (reason) => {
+                            res.push(reason)
+                        }).finally(() => {
+                            if (!--count)
+                                resolve(res)
+                        })
+                    }))
+                })
+            }
+
+            // 有一个promise成功，返回成功的promise值
+            // 所有的promise都reject，才会reject失败的信息
+            static any(iterable) {
+
+                return new Promise((resolve, reject) => {
+                    let len = iterable.length
+                    const errs = []
+                    if(len === 0) reject(errs)
+                    iterable.forEach(p => {
+                        p.then(value => {
+                            resolve(value)
+                        }, reason => {
+                            len--
+                            if(len === 0){
+                                reject(errs)
+                            }
+                        })
+                    })
+                })
+            }
+
+            // 返回第一个promise执行完的值
+            // d第一个返回的可以是成功的promise,也可以是失败的promise
             static race(promises) {
-                if(!Array.isArray(promises)) {
+                if (!Array.isArray(promises)) {
                     throw new Error('need a array')
                 }
 
                 return new Promise((resolve, reject) => {
-                    promises.forEach( p => {
-                        Promise.resolve(p).then(value=>{
+                    promises.forEach(p => {
+                        Promise.resolve(p).then(value => {
                             resolve(value)
                         }, reason => {
                             reject(reason)
