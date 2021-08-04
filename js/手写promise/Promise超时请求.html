@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise超时请求</title>
+</head>
+
+<body>
+    <script>
+        function timeOutRepeat(fn, times, interval) {
+            // 参数校验
+            return new Promise((resolve, reject) => {
+
+                // 定时器句柄传进来
+                function excuteFn(timer) {
+                    if (times < 1) {
+                        window.clearInterval(timer)
+                        reject(new Error('times had use up'))
+                    }
+
+                    times--
+
+                    return fn.then(value => {
+                        window.clearInterval(timer)
+                        resolve(value)
+                    }, reason => {
+
+                    }).catch(err => {
+                        throw new Error('error')
+                    })
+                }
+
+                let promise = null
+                let timer = window.setInterval(() => {
+                    promise = excuteFn(timer)
+                }, interval)
+
+                promise = excuteFn(timer)
+
+            })
+        }
+    </script>
+</body>
+
+</html>
