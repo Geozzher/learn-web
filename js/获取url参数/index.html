@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getURLParam</title>
+</head>
+
+<body>
+    <script>
+        // 1. 通过正则方式获取
+        function getQueryString(name) {
+            let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            let r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return decodeURIComponent(r[2]);
+            };
+            return null;
+        }
+
+
+        const reg = /((\d+)x(\d+))/
+        let s = '1280x720'
+        console.log(s.match(reg));
+
+    </script>
+</body>
+
+</html>
