@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eventBus</title>
+</head>
+
+<body>
+    <script>
+        function eventBus() {
+          this.map = {}
+        }
+
+        eventBus.prototype = {
+            on: function(type, handler) {
+                if (!this.map[type]) {
+                    this.map[type] = (this.map[type] || []).concat([handler])
+                }
+            },
+
+            off: function(type, handler) {
+                if (this.map[type]) {
+                    // handler不存在, type类型的事件全部清除
+                    if (!handler) {
+                        delete this.map[type]
+                    } else {
+                        let index = this.map[type].indexOf(handler)
+                        this.map[type].splice(index, 1)
+                    }
+                }
+            },
+
+            fire: function(type, data) {
+                this.map[type] && this.map[type].forEach(element => {
+                    element(data)
+                });
+            }
+        }
+        function handler1(data) {
+            console.log(' handler1', data);
+        }
+
+        function handler2(data) {
+            console.log(' handler2', data);
+        }
+
+        const eBus = new eventBus()
+        eBus.on('handler1', handler1)
+        eBus.on('handler2', handler2)
+        eBus.fire('handler1', 'hello')
+        eBus.fire('handler2', 'hello')
+
+        eBus.off('handler2', handler2)
+        eBus.fire('handler1', 'hello')
+        eBus.fire('handler2', 'hello')
+
+
+
+    </script>
+</body>
+
+</html>
