@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sleep</title>
+</head>
+<body>
+    <script>
+        // 造成代码假死，变成死循环
+        function sleep(mileseconds) {
+            const start = new Date().getTime()
+            const endTime = start + mileseconds
+            while(true) {
+                if(new Date().getTime() - endTime > 0) {
+                    return
+                }
+            }
+        }
+
+        // sleep(3000)
+        // console.log('3s后');
+        // console.log(new Date().getTime());
+
+        
+        // 基于async函数的sleep
+        function sleep(seconds) {
+            return new Promise(resolve=>setTimeout(resolve, seconds))
+        }
+
+        async function run() {
+            console.log('async start');
+            await sleep(3000)  // 这里会造成一个阻塞
+            console.log('async end');
+        } 
+
+        run()
+        
+    </script>
+</body>
+</html>
