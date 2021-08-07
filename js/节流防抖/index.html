@@ -31,6 +31,10 @@
         function debunce(fn, timer) {
             let t = null
             return function () {
+                let firstClick = !t
+                if(firstClick) {
+                    fn.apply(this, arguments)
+                }
                 if (t) clearTimeout(t)
                 t = setTimeout(() => {
                     fn.apply(this, arguments)
