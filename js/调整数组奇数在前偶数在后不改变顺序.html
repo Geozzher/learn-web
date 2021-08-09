@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adjust</title>
+</head>
+
+<body>
+    <script>
+        // 改变了顺序
+        function adjust(arr) {
+            let i = 0, j = arr.length - 1
+            while (i < j) {
+                // 前奇数后偶数
+                if (isOdd(arr[i]) && !isOdd(arr[j])) {
+                    i++
+                    j--
+                } else if (isOdd(arr[i]) && isOdd(arr[j])) {
+                    // 前奇数后奇数
+                    i++
+                } else if (!isOdd(arr[i]) && isOdd(arr[j])) {
+                    // 前偶数后奇数
+                    swap(arr, i, j)
+                    i++
+                    j--
+                } else {
+                    // 前偶数后偶数
+                    j--
+                }
+            }
+            return arr
+        }
+
+        function isOdd(val) {
+            return val % 2 === 1
+        }
+        function swap(arr, i, j) {
+            let temp = arr[i]
+            arr[i] = arr[j]
+            arr[j] = temp
+        }
+
+        // 不改变顺序，但是用了多余的空间，时间复杂度和空间复杂度都是O(n)
+        function adjustKeepOrder(arr) {
+            let i = 0, j = arr.length - 1, x = i, y = j
+            const newArr = new Array(j + 1)
+            while (i < arr.length || j >= 0) {
+                if (isOdd(arr[i])) {
+                    newArr[x++] = arr[i++]
+                } else {
+                    i++
+                }
+
+                if (!isOdd(arr[j])) {
+                    newArr[y--] = arr[j--]
+                } else {
+                    j--
+                }
+            }
+            return newArr
+        }
+
+        function adjustKeepSpace(arr) {
+            // 指向要交换的地方
+            let index = 0
+            for(let i = 0; i < arr.length; i) {
+                // 是奇数
+                if(isOdd(arr[i])) {
+                   moveBackStep(arr, index, i) 
+                   index++
+                }
+                i++
+            }
+            return arr
+        }
+        /**
+         * 第j个位置的元素移动到i,并将i-j的元素全部后移一位
+         */
+        function moveBackStep(arr, i, j) {
+            let temp = arr[j]
+            while(i < j) {
+                arr[j] = arr[j-1]
+                j--
+            }
+            arr[i] = temp
+
+        }
+
+
+
+        const arr = [1, 3, 4, 6, 7, 8, 9]
+        console.log(adjustKeepSpace(arr))
+    </script>
+</body>
+
+</html>
