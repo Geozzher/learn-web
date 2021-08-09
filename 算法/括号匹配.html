@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>括号匹配</title>
+</head>
+
+<body>
+    <script>
+        function isValid(s) {
+            // write code here
+            const stack = []
+            const map = new Map([[')', '('], [']', '['], ['}', '{']])
+            console.log(map)
+            for (let itm of s) {
+                // 左括号
+                if (!map.has(itm)) {
+                    stack.push(itm)
+                } else {
+                    // 右括号
+                    if (stack.length === 0) return false
+                    let left = stack[stack.length - 1]
+                    if (map.get(itm) === left) {
+                        stack.pop()
+                    } else {
+                        return false
+                    }
+                }
+            }
+
+            return stack.length === 0
+        }
+
+        console.log(isValid('[]'))
+    </script>
+</body>
+
+</html>
