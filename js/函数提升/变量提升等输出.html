@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        console.log(typeof A) // 'function'
+        console.log(typeof B) //  'undefined' B的声明改成let const会报错
+
+        function A() {  
+            return 'A'
+        }
+
+        var obj = {}
+
+        var B = function () {
+            return obj
+        }
+
+        console.log(typeof new A())  // 'object'
+        console.log(typeof A())  // // 'string'
+
+        console.log(new B() === obj)  // true  如果构造函数没有返回这个新对象的话会
+        console.log(B() === obj)  // true
+    </script>
+</body>
+
+</html>
