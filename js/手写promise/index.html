@@ -72,6 +72,18 @@
                 }
             }
 
+            catch(onrejected) {
+                return this.then(undefined, onrejected)
+            }
+
+            finally(fn) {
+                return this.then(value => {
+                    return Promise.resolve(fn()).then(()=>value)
+                }, reason => {
+                    return Promise.resolve(fn()).then(() => {throw reason})
+                })
+            }
+
             // 所有的promise执行成功触发成功的回调
             // 成功的promise的参数是所有成功的promise的value的数组
             // 失败就返回第一个失败的promise的reason
@@ -126,13 +138,13 @@
                 return new Promise((resolve, reject) => {
                     let len = iterable.length
                     const errs = []
-                    if(len === 0) reject(errs)
+                    if (len === 0) reject(errs)
                     iterable.forEach(p => {
                         p.then(value => {
                             resolve(value)
                         }, reason => {
                             len--
-                            if(len === 0){
+                            if (len === 0) {
                                 reject(errs)
                             }
                         })
