@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.name = 'ByteDance';
+        function A() {
+            this.name = 123;
+        }
+        A.prototype.getA = function () {
+            console.log(this);
+            return this.name + 1;
+        }
+        let a = new A();  // window
+        let funcA = a.getA;
+        funcA();  // ByteDance1
+
+        setTimeout(() => {
+            console.log(1);
+        }, 0);
+        setInterval(() => {
+            console.log(2);
+        }, 0);
+        console.log(3);
+        new Promise(() => {
+            console.log(4);
+        });
+        while (5) {
+            console.log(5);
+        }
+
+        // 3 4 5[无限循环]
+    </script>
+</body>
+
+</html>
