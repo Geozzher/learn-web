@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表格排序</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="jsCountdown">
+        <span>01天</span>
+        <span>02:</span>
+        <span>03:</span>
+        <span>04</span>
+    </div>
+    <script>
+        function second(second) {
+            let day = Math.floor(second / 60 / 60 / 24)
+            let hour = Math.floor(second / 60 / 60 - (day * 24))
+            let min = Math.floor(second / 60 - (day * 24 * 60 + hour * 60))
+            let seconds = second % 60
+            return {
+                day,
+                hour,
+                min,
+                second: seconds
+            }
+        }
+
+        function render(data) {
+            const countDownContainer = document.querySelector('#jsCountdown')
+            let spanList = ''
+
+            // 对不足两位的补0
+            Object.keys(data).forEach(itm => {
+                let val = data[itm].toString()
+                if ((val.length < 2)) {
+                    data[itm] = '0' + val
+                }
+            })
+            if (data.day === '00') {
+                spanList += `<span class="hide">${data.day}天</span>`
+            } else {
+                spanList += `<span>${data.day}天</span>`
+            }
+            spanList +=
+                `<span>${data.hour}:</span>
+        <span>${data.min}:</span>
+        <span>${data.second}</span>`
+
+            countDownContainer.innerHTML = spanList
+        }
+        
+        let maxtime = 11000000
+        function countDown() {
+            if(maxtime >= 0) {
+                render(second(maxtime))
+                --maxtime
+            } else {
+                clearInterval(timer)
+            }
+        }
+
+        timer = setInterval(countDown, 1000);
+    </script>
+</body>
+
+</html>
