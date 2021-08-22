@@ -20,13 +20,14 @@
             arr[i] = arr[j]
             arr[j] = temp
         }
-
+        // 从最后一个非叶子节点开始
         function buildHeap(arr, len) {
             for(let i = Math.floor(len / 2); i >= 0; i--) {   
                 maxHeap(arr, i, len)
             }
         }
 
+        // 递归构建第i个节点的大顶堆
         function maxHeap(arr, i, len) {
             let maxNode
             let left = 2 * i + 1
