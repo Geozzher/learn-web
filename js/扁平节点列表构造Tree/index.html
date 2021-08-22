@@ -69,37 +69,46 @@
 
         function bulidTree() {
             const map = new Map()
-            let tree = {}
+            let res = []
+            for (const i of menu_list) {
+                map.set(i.id, { ...i, children: [] })
+            }
 
-            menu_list.forEach(node => {
-                if (node.id) {
-                    map.set(node.id, node)
-                }
-            })
+            for(const i of menu_list) {
+                const newItem = map.get(i.id)
 
-            menu_list.forEach(node => {
-                if (node.parent_id) {
-                    let pNode = map.get(node.parent_id)
-                    console.log(Array.isArray(pNode.children))
-                    pNode.children = Array.isArray(pNode.children) ? pNode.children.push(node) : [node]
+                if(i.parent_id === 0) {
+                    res.push(newItem)
                 } else {
-                    tree = node
-                    // console.log(node)
+                    if(Object.prototype.hasOwnProperty.call(newItem, 'parent_id')) {
+                        map.get(i.parent_id).children.push(newItem)
+                    }
                 }
-            })
-            // console.log(map)
-
-            return tree
+            }
+            return res
         }
 
         // 树向扁平化数组转化
         function treeToArray(tree) {
             let res = []
 
-            for(let itm of tree) {
-                let {children , ...i} = item
-                if(children && children.length) {
+            for (let itm of tree) {
+                let { children, ...i } = itm
+                if (children && children.length) {
                     res = res.concat(treeToArray(children))
+                }
+                res.push(i)
+            }
+            return res
+        }
+
+        function tr(tree) {
+            let res = []
+
+            for(let itm of tree) {
+                let {children, ...i} = itm
+                if(children && children.length) {
+                    res = res.concat(tr(children))
                 }
                 res.push(i)
             }
@@ -107,7 +116,11 @@
             return res
         }
 
-        console.log(bulidTree(menu_list));
+        let tree = bulidTree(menu_list)
+        let arr = treeToArray(tree)
+
+        console.log(tree);
+        console.log(arr);
     </script>
 </body>
 

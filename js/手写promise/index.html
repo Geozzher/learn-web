@@ -34,7 +34,7 @@
                 }
 
                 let reject = (reason) => {
-                    if (this.status === REJECTED) {
+                    if (this.status === PENDING) {
                         this.reason = reason
                         this.status = REJECTED
 

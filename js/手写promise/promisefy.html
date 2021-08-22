@@ -11,6 +11,7 @@
 <body>
     <script>
         // 接收一个函数，返回一个函数，函数的执行结果是一个promise
+        // fn是有3个参数fn(err, result, callback)
         function promisefy(fn) {
             return function (...args) {
                 // args存的是前面的参数，最后一个回调放在最后需要单独添加

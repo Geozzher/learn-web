@@ -14,7 +14,7 @@
             // 参数校验
             return new Promise((resolve, reject) => {
 
-                // 定时器句柄传进来
+                // 定时器句柄传进来,利用闭包
                 function excuteFn(timer) {
                     if (times < 1) {
                         window.clearInterval(timer)
