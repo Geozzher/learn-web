@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+</head>
+
+<body>
+    <script>
+        function changeObjectProperty(o) {
+            o.siteUrl = 'http://www.baidu.com'
+            o = new Object()
+            o.siteUrl = 'http://www.google.com'
+        }
+
+        let webSite = new Object()
+        changeObjectProperty(webSite)
+        console.log(webSite.siteUrl)  // http://www.baidu.com // website和局部变量o一开始指向同一块对象，后来o断开引用指向新的对象，而website仍然指向新的对象
+    </script>
+</body>
+
+</html>
