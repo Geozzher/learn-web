@@ -78,10 +78,44 @@
 
             finally(fn) {
                 return this.then(value => {
-                    return Promise.resolve(fn()).then(()=>value)
+                    return Promise.resolve(fn()).then(() => value)
                 }, reason => {
-                    return Promise.resolve(fn()).then(() => {throw reason})
+                    return Promise.reject(fn()).then(() => { throw reason })
                 })
+            }
+
+            // prromise.resolved返回的是一个promise实例
+            // 返回的promise的实例的对象的状态根据传入的参数确定，不一定是resolve状态
+            static resolve(value) {
+                if (value && value instanceof Promise) {
+                    // 参数是promise的实例，原封不动的返回
+                    return value
+                } else if (value && typeof value === 'object' && typeof value.then === 'function') {
+                    // c参数是一个thenbale对象(即一个具有then方法的对象)
+                    let then = value.then
+                    return new Promise(resolve => {
+                        then(resolve)
+                    })
+                } else if (value) {
+                    // 参数是原始值
+                    return new Promise(resolve => resolve(value))
+                }
+                else {
+                    // 不带任何参数
+                    return new Promise(resolve => resolve())
+                }
+            }
+             // prromise.resolved返回的是一个promise实例
+            // 返回的promise的实例的对象的状态根据传入的参数确定，不一定是reject状态
+            static reject(value) {
+                if (value && typeof value === 'object' && typeof value.then === 'function') {
+                    let then = value.then;
+                    return new Promise((resolve, reject) => {
+                        then(reject);
+                    });
+                } else {
+                    return new Promise((resolve, reject) => reject(value));
+                }
             }
 
             // 所有的promise执行成功触发成功的回调
