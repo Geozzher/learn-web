@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿里面试</title>
+</head>
+
+<body>
+    <script>
+        function observer(obj, props, cb) {
+            props.forEach(prop => {
+                const [ob, child] = prop.split('.')
+                if (child) {
+                    return observer(obj[ob], [child], cb)
+                }
+                
+                const value = obj[prop]
+                Object.defineProperty(obj, prop, {
+                    set: function (newVal) {
+                        const temp = this.value || value
+                        this.value = newVal
+                        cb(newVal, temp)
+                    },
+                    get: function () {
+                        return this.value || value
+                    }
+                })
+            })
+        }
+
+        var o = {
+            a: 1,
+            b: 2,
+            c: {
+                x: 1,
+                y: 2
+            }
+        }
+
+        observer(o, ['a', 'c.x'], (v, prev) => {
+            console.log(v);
+            console.log(prev);
+        });
+
+        o.a = 2;// 1, 2
+        o.b = 3;// 不打印
+        o.c.x = 3;// 1, 3
+    </script>
+</body>
+
+</html>
