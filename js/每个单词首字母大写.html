@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 对每个单词开头字母实现大写
+        var a = 'My name is zhang';
+        var reg = /\s(\w)/g
+        a = a.replace(reg, function(_,c,r,o){
+            console.log(_,c,r,o);
+            return c ? ' ' + c.toUpperCase():''
+        })
+        console.log(a);
+    </script>
+</body>
+
+</html>
