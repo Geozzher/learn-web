@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEW</title>
+</head>
+
+<body>
+    <script>
+        // 第一个参数是new的对象
+        // 剩余的参数是置入的参数
+        function myNew() {
+            // 获取构造器和参数
+            let Con = Array.prototype.shift.call(arguments)
+            // 以构造器的prototype为原型，执行创建一个新对象
+            let newObj = Object.create(Con.prototype)
+            // 新对象和调用参数传给构造器执行
+            let result = Con.apply(newObj, arguments)
+            // 构造器没有手动返回对象，就返回新创建的对象
+            return typeof result == 'object' ? result : newObj
+        }
+
+        function Person(name, age) {
+            this.name = name
+            this.age = age
+        }
+
+        let newP = myNew(Person, 'zhangsan', 11)
+        console.log(newP);
+    </script>
+</body>
+
+</html>
