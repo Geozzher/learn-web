@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 描述
+            给定字符串 str，检查其是否包含 连续3个数字
+            1、如果包含，返回最先出现的 3 个数字的字符串
+            2、如果不包含，返回 false
+            示例1
+            输入：
+            '9876543'
+            输出：987 -->
+    <script>
+        function captureThreeNumbers(str) {
+            let reg = /\d{3}/g  // 匹配三个数字
+            let res = str.match(reg)
+            console.log(res)
+            if (res && res.length) {
+                for (let nums of res) {
+                    if (Number(nums[1]) * 2 == Number(nums[0]) + Number(nums[2]))
+                        return nums
+                }
+            }
+            return false
+        }
+
+        console.log(captureThreeNumbers('9876543'));
+    </script>
+</body>
+
+</html>
