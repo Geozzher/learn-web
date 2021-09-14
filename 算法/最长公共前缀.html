@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+        * @param {string[]} strs
+        * @return {string}
+        */
+        var longestCommonPrefix = function (strs) {
+            function find(str1, str2) {
+                if (str1.length > str2.length) {
+                    [str1, str2] = [str2, str1]
+                }
+                let res = ''
+                for (let i = 0; i < str1.length; i++) {
+                    if (str1[i] != str2[i]) {
+                        // todo 跳出循环没有返回值         
+                        break
+                    }        
+                    res += str1[i]
+                   
+                }
+                return res
+            }
+
+            if (strs.length < 2) return ''
+            let prevStr = strs[0]
+            for (let i = 1; i < strs.length; i++) {
+                prevStr = find(prevStr, strs[i])
+            }
+            return prevStr
+        };
+
+        const strs = ["flower","flow","flight"]
+        console.log(longestCommonPrefix(strs))
+
+
+
+    </script>
+</body>
+
+</html>
