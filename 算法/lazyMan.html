@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lazyMan</title>
+</head>
+
+<body>
+    <script>
+        // 乞丐版
+        const lazyMan = (name) => {
+            console.log(`hello, 我是${name}`);
+            var api = {
+                sleep(n) {
+                    var t1 = Date.now()
+                    while (Date.now() - t1 < n * 1000) {
+
+                    }
+                    console.log(`我睡醒了`);
+                    return api
+                },
+                eat(type) {
+                    console.log(type);
+                    return api
+                },
+                sleepFirst() {
+
+                }
+            }
+
+            return api
+        }
+
+        // lazyMan('xiaohong').sleep(0).eat('apple')
+
+        //  增强版，直接执行，不带执行器函数，
+        const lazyManPlus = (name) => {
+            var queue = []
+            const hello = () => { console.log(`hello, 我是${name}`); next() }
+            queue.push(hello)
+            const next = () => { const first = queue.shift(); typeof first == 'function' && first() }
+            setTimeout(()=>{next()}, 0)
+            const api = {
+                _queue: queue,
+                sleep(n) {
+                    const task = () => { setTimeout(() => { console.log(`我醒了，我睡了${n}秒`); next() }, n * 1000) };
+                    queue.push(task)
+                    return api
+                },
+                eat(food) {
+                    const task = () => { console.log(`eat ${food}`) };
+                    queue.push(task)
+                    return api
+                },
+                sleepFirst(n) {
+                    const task = () => { setTimeout(() => { console.log(`我醒了，我睡了${n}秒`); next() }, n * 1000) };
+                    queue.unshift(task)
+                    return api
+                }
+            }
+            return api
+        }
+        lazyManPlus('aa').eat('onabort').sleepFirst(2)
+
+        // 增强版++,带执行器函数
+        const lazyManPlusPlus = (name) => {
+            var queue = []
+            const hello = () => { console.log(`hello, 我是${name}`); next() }
+            queue.push(hello)
+            const next = () => { const first = queue.shift(); typeof first == 'function' && first() }
+            const api = {
+                _queue: queue,
+                sleep(n) {
+                    const task = () => { setTimeout(() => { console.log(`我醒了，我睡了${n}秒`); next() }, n * 1000) };
+                    queue.push(task)
+                    return api
+                },
+                eat(food) {
+                    const task = () => { console.log(`eat ${food}`); };
+                    queue.push(task)
+                    return api
+                },
+                sleepFirst(n) {
+                    const task = () => { setTimeout(() => { console.log(`我醒了，我先睡了${n}秒`); next() }, n * 1000) };
+                    queue.unshift(task)
+                    return api
+                },
+                excute() {
+                    // 开始执行
+                    next()
+                }
+            }
+            return api
+        }
+
+        // lazyManPlusPlus('aa').eat('onabort').sleepFirst(3).excute()
+
+
+    </script>
+</body>
+
+</html>
