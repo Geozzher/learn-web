@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表达式求值</title>
+</head>
+
+<body>
+    <!-- (2*(3-4))*5 -->
+    <!-- 2*3-4*5 + 5 / 2 -->
+    <script>
+        // function solve(s) {
+        //     s = s.trim();
+        //     const stack = new Array();
+        //     let preSign = '+';
+        //     let num = 0;
+        //     const n = s.length;
+        //     for (let i = 0; i < n; ++i) {
+        //         if (!isNaN(Number(s[i])) && s[i] !== ' ') {
+        //             // num = num * 10 + s[i].charCodeAt() - '0'.charCodeAt()
+        //             num = Number(s[i])
+        //         }
+        //         if (isNaN(Number(s[i])) || i === n - 1) {
+        //             switch (preSign) {
+        //                 case '+':
+        //                     stack.push(num);
+        //                     break;
+        //                 case '-':
+        //                     stack.push(-num);
+        //                     break;
+        //                 case '*':
+        //                     stack.push(stack.pop() * num);
+        //                     break;
+        //                 default:
+        //                     stack.push(stack.pop() / num | 0);
+        //             }
+        //             preSign = s[i];
+        //             num = 0;
+        //         }
+        //     }
+        //     let ans = 0;
+        //     while (stack.length) {
+        //         ans += stack.pop();
+        //     }
+        //     return ans;
+        // }
+
+        let s = '2*3-4*5 + 5 /2'
+        console.log(solve(s));
+
+        function solve(s) {
+            s = s.trim()
+            let lenS = s.length
+            let preSign = '+'
+            let num = 0
+            let stack = []
+
+            for (let i = 0; i < lenS; i++) {
+                let itm = s[i]
+                // 数字判断
+                if (!isNaN(Number(itm)) && itm != ' ') {
+                    num = Number(itm)
+                }
+                if (isNaN(Number(itm)) || i === lenS - 1) {
+                    // 根据前一个符号计算结果
+                    switch (preSign) {
+                        case '+':
+                            stack.push(num)
+                            break
+                        case '-':
+                            stack.push(-num)
+                            break
+                        case '*':
+                            stack.push(stack.pop() * num)
+                            break
+                        case '*':
+                            stack.push(stack.pop() / num | 0)
+                            break
+                    }
+                    preSign = itm
+                    num = 0
+                }
+            }
+            let ans = 0
+            while (stack.length) {
+                ans += stack.pop()
+            }
+
+            return ans
+        }
+    </script>
+</body>
+
+</html>
