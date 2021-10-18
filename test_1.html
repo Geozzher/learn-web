@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .rules-panel {
+            position: absolute;
+            width: 800px;
+            height: 600px;
+            /* border: gray 1px solid; */
+            background-color: white;
+            box-shadow: 4px 4px 15px rgb(206, 202, 202);
+        }
+
+        .rules-panel .rules-panel-header {
+            width: 100%;
+            height: 50px;
+            padding: 10px  0 0 20px;
+        }
+
+        .rules-panel .rules-panel-header .rules-select {
+            width: 120px;
+            height: 30px;
+            color: gray;
+            border-color: rgb(206, 202, 202);
+            outline-color: rgb(206, 202, 202);
+            border-radius: 5px;
+            margin-right: 30px;
+        }
+        .rules-panel .rules-panel-header button {
+            width: 50px;
+            height: 30px;
+            float: right;
+            color: gray;
+            border-color: rgb(206, 202, 202);
+            outline-color: rgb(206, 202, 202);
+            border-radius: 5px;
+            margin-right: 30px;
+            cursor: pointer;
+        }
+
+        .rules-panel .rules-container {
+            height: 535px;
+            overflow: auto
+        }
+
+        .rules-panel table {
+            /* display: block; */
+            width: 100%;
+            height: auto;
+            padding: 0 20px;
+            table-layout: fixed;
+
+        }
+
+        .rules-panel table td {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: keep-all;
+        }
+
+        .rules-panel table thead td {
+            height: 50px;
+            text-align: center;
+            background-color: rgb(206, 202, 202);
+        }
+
+        .rules-panel table thead .cols-1 {
+            width: 30%;
+        }
+
+        .rules-panel table tbody td {
+            height: 30px;
+            text-align: center;
+            border-bottom: 1px solid rgb(206, 202, 202);
+        }
+    </style>
+</head>
+
+<body>
+    <div id='rules-panel' class='rules-panel'>
+        <div id='rules-panel-header' class='rules-panel-header'>
+            <select class='rules-select' name='rules-type' id='rules-type'>
+                <option value='地震' selected>地震</option>
+                <option value='火灾'>火灾</option>
+                <option value='洪灾'>洪灾</option>
+                <option value='交通事故'>交通事故</option>
+                <option value='地质灾害'>地质灾害</option>
+                <option value='房屋倒塌'>房屋倒塌</option>
+            </select>
+            <select class='rules-select' name='rules-status' id='rules-status'>
+                <option value='灾前' selected>灾前</option>
+                <option value='灾中'>灾中</option>
+                <option value='灾后'>灾后</option>
+            </select>
+            <select class='rules-select' name='rules-scale' id='rules-scale'>
+                <option value='国家' selected>国家</option>
+                <option value='省级'>省级</option>
+                <option value='区域'>区域</option>
+            </select>
+
+            <button>关闭</button>
+
+        </div>
+
+        <div class='rules-container'>
+            <table>
+                <thead>
+                    <tr class='rows'>
+                        <td class='cols-1'>图名</td>
+                        <td class='cols-2'>规则</td>
+                    </tr>
+                </thead>
+
+                <tbody id='rules-content'>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>  <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                    <tr class='rows'>
+                        <td class="cols-1">1</td>
+                        <td class="cols-2">2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <script>
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gongjvhaoshu</title>
+</head>
+
+<body>
+    <script>
+        function fn(name) {
+            var nameOwn = name
+            var callbacks = []
+            callbacks.push(() => { console.log('hello, ' + nameOwn) })
+
+            fn.sleep = function (second) {
+                callbacks.push(async () => {
+                    console.log('... wait start ' + second + 's');
+                    let res = await new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            resolve('success')
+                        }, second * 1000);
+                    })
+                    console.log('... wait end ' + second + 's');
+                })
+                return this
+            }
+
+            fn.do = function(params) {
+                callbacks.push(()=> {
+                    console.log('do... ' + params)
+                })
+                return this
+            }
+
+
+            // 死循环
+            fn.wait = function (seconds) {
+                console.log('... wait start ' + seconds + 's');
+                callbacks.push(() => {
+                    let i = 0
+                    let intervalHandle
+                    debugger
+                    while (i < seconds) {
+                        intervalHandle = setInterval(() => {
+                            i++
+                        }, 1000);
+                    }
+                    clearInterval(intervalHandle)
+
+                })
+                return this
+            }
+
+
+            fn.execute = function () {
+                callbacks.forEach(fn => fn())
+                return this
+            }
+            return fn
+
+
+        }
+
+
+        fn('xiaoming').sleep(5).do('ddd').execute()
+        // console.log(fn('xiaoming').execute());
+    </script>
+</body>
+
+</html>

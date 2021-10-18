@@ -10,29 +10,6 @@
 
 <body>
     <script>
-        // 找出从n到最后一个元素中最小的元素
-        function findMin(arr, n) {
-            let minIndex = n
-            for (let i = n; i < arr.length; i++) {
-                if (arr[i] < arr[minIndex]) {
-                    minIndex = i
-                }
-            }
-            return minIndex
-        }
-
-        function select_sort(arr) {
-            const len = arr.length
-            let minIndex, temp
-
-            for (let i = 0; i < len; i++) {
-                minIndex = findMin(arr, i)
-                temp = arr[i]
-                arr[i] = arr[minIndex]
-                arr[minIndex] = temp
-            }
-            return arr
-        }
 
         // 直接写
         function insert_sort_direct(arr) {
